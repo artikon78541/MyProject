@@ -1,0 +1,26 @@
+﻿@using Autoshop1.Models.Vendors
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Загрузка прайсов";
+}
+
+
+
+<div class="dash__header__search">
+    <div class="report-name">
+        <h4 class="headerM">Загрузка прайсов</h4>
+    </div>
+</div>
+
+<div class="mainblock">
+    <div class="price-loading">
+        <form class="form-price-loading" enctype="multipart/form-data" method="post" asp-controller="FileLoader" asp-action="LoadingInfo">
+            <p>
+                <input type="file" name="file" multiple accept=".xls, .xlsx, .xlsb" />
+            </p>
+            <p>
+                <input class="btn" type="submit" value="Загрузить" />
+            </p>
+        </form>
+    </div>
+</div>

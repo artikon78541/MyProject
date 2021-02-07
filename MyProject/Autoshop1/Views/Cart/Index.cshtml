@@ -1,0 +1,45 @@
+﻿@model Autoshop1.Models.ViewModels.CartViewModel
+@{
+    Layout = "_Layout";
+}
+<div class="order">
+    <h2> Ваша корзина</h2>
+    <table class="search-table">
+        <thead>
+            <tr>
+                <th>Артикул</th>
+                <th>Наименование</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Сумма</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Cart.CartItems)
+            {
+                <tr>
+                    <td class="text-left" hidden>@line.CartItemID</td>
+                    <td class="text-left">@line.CartPartNumber</td>
+                    <td class="text-left">@line.CartPartName</td>
+                    <td>@line.CartSellingPrice.ToString()</td>
+                    <td class="text-center">@line.CartQuantity</td>
+                    <td>@(line.CartSellingPrice*line.CartQuantity)</td>
+                    @*<td class="text-center"><a class="text-danger" asp-controller="Cart" asp-action="RemoveFromCart"></a></td>*@
+                    <td class="text-center">
+                        <a class="cart-button" style="float:right" type="submit" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-partId="@line.CartItemID"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right" style="text-align:right">Общая сумма:</td>
+                <td class="text-right">@Model.CartTotal.ToString() руб.</td>
+            </tr>
+        </tfoot>
+    </table>
+
+
+</div>
+<div class="makeOrder"><input type="button" value="Оформить заказ" onclick="location.href='@Url.Action("MakeOrder", "Cart")'" /></div>

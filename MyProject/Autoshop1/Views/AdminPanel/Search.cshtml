@@ -1,0 +1,287 @@
+﻿@using Autoshop1.Models.Repositories
+@*@model IEnumerable<SearchPart>*@
+@using Autoshop1.Models.ViewModels
+@model ModelCollection
+@*@{
+        Layout = "_AdminOrderLayout";
+        ViewBag.Title = "Поиск";
+    }*@
+
+
+
+<script>
+
+    //$(document).ready(function () {
+
+    //    $("form").submit(function (e) {
+
+    //        //var sendingData = {
+    //        //    partId: $("input[name='partId']").val(),
+    //        //    quant: $("input[name='quant']").val()
+    //        //}
+
+    //        e.preventDefault();
+    //        $.ajax({
+
+    //            url: "/AdminPanel/ToCartTest/",
+    //            contentType: 'application/json',
+    //            dataType: "json",
+    //            method: "POST",
+    //            data: JSON.stringify({ partId: $("input[name='partId']").val() }),
+    //            //data: JSON.stringify(sendingData),
+    //            //data: { sendingData },
+    //            success: function (json) {
+    //                alert("Value Added");
+
+    //            }
+
+    //        });
+
+    //    });
+    //});
+
+
+
+
+    //$(document).ready(function () {
+
+    //    $("form").submit(function (e) {
+                  
+
+            
+    //        var part = $("input[name='partId']").val();
+    //        var qua = $("input[name='quant']").val();
+    //        var valdata = { partId: part, quant = qua };
+
+
+    //        e.preventDefault();
+    //        $.ajax({
+
+    //            url: "/AdminPanel/ToCartTest/",
+    //            //contentType: 'application/json; charset=UTF-8',
+    //            dataType: "json",
+    //            method: "POST",
+    //            data: JSON.stringify(valdata),
+    //            success: function (data) {
+    //                alert("Value Added");
+
+    //            }
+
+    //        });
+
+    //    });
+    //});
+
+//$().ready(function () {
+
+//    $("form").submit(function (e) {
+
+//        var sendingData = {
+//            partId: $('input[name="partId"]').val(),
+//            quant: $('input[name="quant"]').val()
+//        }
+
+//        e.preventDefault();
+//        $.ajax({
+
+//            url: "/AdminPanel/ToCartTest/",
+//            contentType: 'application/json',
+//            dataType: "json",
+//            method: "POST",
+
+//            success: function (data) {
+//                alert("Value Added");
+
+//            },
+//            data: JSON.stringify(sendingData),
+//            error: function (data) { alert(data.responseText); }
+
+//        });
+
+
+//    });
+
+//});
+
+    //$(function () {
+
+    //    $("form").submit(function (e) {
+
+    //        var p = $("input[name='partId']").val()
+    //        var q = $("input[name='quant']").val()
+
+    //        var sData = {
+    //            partId: p,
+    //            quant: q
+    //        }
+
+    //        e.preventDefault();
+    //        $.ajax({
+
+    //            url: "/AdminPanel/ToCartTest/",
+    //            type: "POST",
+
+    //            success: function (data) {
+    //                alert("Товар добавлен в корзину");
+
+
+    //            },
+    //            data: { sendingData: sData },
+    //            error: function (data) { alert(data.responseText); }
+
+    //        });
+
+
+    //    });
+
+    //});
+
+    $(function () {
+
+        $("form").submit(function (e) {
+
+
+            var id = $(this).attr("id")
+            var stt = '#' + id
+
+            var p = $(stt).find("input[name='partId']").val()
+            var q = $(stt).find("input[name='quant']").val()
+
+
+            var sData = {
+                partId: p,
+                quant: q,
+                str: stt
+            }
+
+            e.preventDefault();
+            $.ajax({
+
+                url: "/AdminPanel/ToCartTest/",
+                type: "POST",
+
+                success: function (data) {
+                    alert("Товар добавлен в корзину");
+
+                    var stringCartTotal = $("#cart-total").text()
+                    var cartTotal = parseInt(stringCartTotal.substring(1, stringCartTotal.length - 1));
+                    var result = cartTotal + 1;
+                    $("#cart-total").html("(" + result + ")");
+
+                },
+                data: { sendingData: sData },
+                error: function (data) { alert(data.responseText); }
+
+            });
+
+
+        });
+
+    });
+
+    //$(function () {
+
+    //    $("#1").submit(function (e) {
+
+
+    //        alert("Работает");
+
+    //        $.ajax({
+    //            url: "/AdminPanel/SelectUser/",
+    //            data: { searchUser: $("#searchInput").val() },
+    //            cache: false,
+    //            success: function (returnhtml) {
+    //                var obj = JSON.parse(returnhtml);
+    //                $("#NumId").html(obj[0].Email);
+    //                $("#EmailId").html(obj[0].Email);
+    //                $("#PhoneId").html(obj[0].PhoneNumber);
+    //                $("#NameId").html(obj[0].UserFIO);
+    //                $("#cart-total").html("(" + obj[1].CartItems + ")");
+    //                $("#searchInput").val("");
+
+    //            },
+    //            dataType: "json"
+    //        });
+    //    });
+
+    //});
+
+    //function clickHandler() {
+    //    alert("Работает");
+    //}
+
+</script>
+
+
+
+
+
+@{ if (!(Model is null))
+    {
+        <div class="search-list" id="search-list">
+            @{ if (!(Model.GetModel<List<SearchPart>>().Count() > 0))
+                {
+                    <h4>По вашему запросу ничего не найдено</h4>
+                }
+                else
+                {<table class="search-table">
+                        <thead>
+                            <tr>
+                                <th>Бренд</th>
+                                <th>Номер</th>
+                                <th>Наименование</th>
+                                <th>Срок поставки</th>
+                                <th>На складе</th>
+                                <th>Цена закупки</th>
+                                <th style="text-align: center;">Поставщик</th>
+                                <th style="text-align: center;">Цена клиента</th>
+                                <th style="width: 15%; text-align: center;">Заказ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var p in Model.GetModel<List<SearchPart>>())
+                                {
+                                    <tr>
+
+                                        <td>@p.Brand</td>
+                                        <td>@p.PartNumber</td>
+                                        <td>@p.PartName</td>
+                                        <td>@p.DeliveryDate.Date.ToString("d")</td>
+                                        <td>@p.QuantityInStock</td>
+                                        <td>@p.BuyingPrice</td>
+                                        <th>@p.VendorId</th>
+
+                                        <td class="th-price">
+                                            <input type="text" class="input-field-price" placeholder="@p.SellingPrice"
+                                                   value="">
+                                        </td>
+                                        <td align="center">
+                                            <div class="input-cart">
+
+
+                                                @*<form method="post" class="input_loginfield" asp-action="ToCart" asp-controller="AdminPanel">*@
+                                                @*<form class="pq" data-ajax-update="#c-partial"
+        data-ajax="true" data-ajax-method="POST" data-ajax-success="success" asp-action="ToCart" asp-controller="AdminPanel">*@
+                                                <form class="pq"  id=@p.PartId>
+                                                    <input type="text" name="quant" class="input-field inp-quant" placeholder="1" value="1">
+                                                    <input type="hidden" name="partId" class="input-field inp-partId" value="@p.PartId">
+                                                    @*<a class="cart-button" id="btnToBuy">В корзину</a>*@
+                                                    <button class="cart-button" type="submit">Купить</button>
+                                                    @*<a class="cart-button" type="submit" asp-controller="AdminPanel"
+                                                        asp-action="ToCart" asp-route-partId="@p.PartId" asp-route-quant="5" id="btnToBuy">В корзину</a>*@
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+
+    }
+}
+

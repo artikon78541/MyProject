@@ -1,0 +1,70 @@
+﻿@using Autoshop1.Models.ViewModels
+
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Clients";
+}
+@model IEnumerable<AdminUserViewModel>
+
+<div class="dash__header">
+    <h4 class="headerM">Клиенты</h4>
+    <form method="get" class="input_loginfield" asp-action="ClientsList" asp-controller="Admin">
+        <input name="search" placeholder="Введите логин клиента..." type="search" class="loginfield">
+        <label for="dateInput" style="font-size: 14px;">Дата регистрации:</label>
+        <input name="DateFrom" placeholder="" class="dateInput" type="date">
+        <input name="DateTo" placeholder="" type="date" class="dateInput">
+        <button class="btn" type="submit">Поиск</button>
+    </form>
+    <a class="btn" type="submit" asp-controller="Admin" asp-action="ClientsToExcel">Выгрузка</a>
+</div>
+
+<div class="mainblock">
+
+    @*<div class="user-list">
+            @if (Model.Count() == 0)
+            {
+                <h3>Клиенты не найдены</h3>
+            }
+            else
+            {
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>N</th>
+                            <th>Код</th>
+                            <th>Номер</th>
+                            <th>Логин</th>
+                            <th>Имя</th>
+                            <th>Телефон</th>
+                            <th>Дата регистрации</th>
+                            <th>Роль</th>
+                            <th align="center">Изменить</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (AdminUserViewModel user in Model)
+                        {
+                            <tr>
+                                <td>1</td>
+                                <td>@user.Id</td>
+                                <td>@user.MdbNumber</td>
+                                <td>@user.Email</td>
+                                <td>@user.UserFIO</td>
+                                <td>@user.PhoneNumber</td>
+                                <th>@user.RegistrationDate</th>
+                                <td>@user.Roles</td>
+
+                                <td align="center">
+                                    <div class="user_update">
+                                        <a class="user_upd_btn" type="submit" asp-action="Edit"
+                                           asp-route-id="@user.Id">Изменить</a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>*@
+</div>

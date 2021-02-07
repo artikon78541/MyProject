@@ -1,0 +1,102 @@
+﻿@*@using Autoshop1.Models.ViewModels
+    @model ShopUserPartModel*@
+@using Autoshop1.Models.ViewModels
+@*@model ModelCollection*@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminPanel</title>
+    @*<script src="~/lib/jquery-ajax/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>*@
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;1,200&family=Roboto&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0fb52fd33c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/cssAdmin.css" type="text/css">
+    <script type="text/javascript" src="js/site.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="admin-container">
+            <div class="admin-menu">
+                <div class="user-frame">
+                    <span class="user-info">
+                        <span class="login">@ViewBag.managerName</span>
+                        <span class="role">@ViewBag.managerRole</span>
+                    </span>
+
+                </div>
+                <div class="main-menu">
+                    <ul class="menu">
+                        <li class="menu__item">
+                            <a asp-controller="Admin" asp-action="Clients"> Клиенты</a>
+                        </li>
+                        <li class="menu__item">
+                            <a asp-controller="AdminPanel" asp-action="Index"> Заказы</a>
+                        </li>
+                        <li class="menu__item">
+                            <a asp-controller="Admin" asp-action="Clients"> Отчет по клиентам</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href=#> Отчет по заказам</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href=#> Отчет по артикулам</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href=#> Отчет по корзинам</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href=#> Отчет по запросам</a>
+                        </li>
+                        <li class="menu__item">
+                            <a asp-controller="FileLoader" asp-action="Index"> Загрузка прайсов</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="admin-dashboard">
+                <div class="dash__header__search">
+                    <div class="report-name">
+                        <h4 class="headerM">Information</h4>
+                    </div>
+                    <div class=" searchPart-form">
+                        @*asp-action="Search" asp-controller="AdminPanel"*@
+                        <form method="get">
+                            <input name="searchline" placeholder="Введите номер запчасти..." class="admin-search-part"
+                                   type="search" id="seaInput">
+                            <button class="btn" type="submit" id="seaBtn">Поиск</button>
+                        </form>
+                    </div>
+
+
+                </div>
+
+                <div class="mainblock">
+                    @await Html.PartialAsync("RenderUser")
+
+                    <div class="s-list" id="s-list">
+                        @await Html.PartialAsync("Search")
+
+                     </div>
+                        @RenderBody()
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

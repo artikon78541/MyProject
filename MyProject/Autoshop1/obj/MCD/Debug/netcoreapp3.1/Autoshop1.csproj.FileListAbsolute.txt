@@ -1,0 +1,8 @@
+C:\Users\Роман\source\repos\MyProject\Autoshop1\obj\MCD\Debug\netcoreapp3.1\Autoshop1.csprojAssemblyReference.cache
+C:\Users\Роман\source\repos\MyProject\Autoshop1\obj\MCD\Debug\netcoreapp3.1\Autoshop1.AssemblyInfoInputs.cache
+C:\Users\Роман\source\repos\MyProject\Autoshop1\obj\MCD\Debug\netcoreapp3.1\Autoshop1.AssemblyInfo.cs
+C:\Users\Роман\source\repos\MyProject\Autoshop1\obj\MCD\Debug\netcoreapp3.1\Autoshop1.csproj.CoreCompileInputs.cache
+C:\Users\Роман\source\repos\MyProject\Autoshop1\obj\MCD\Debug\netcoreapp3.1\Autoshop1.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Роман\source\repos\MyProject\Autoshop1\obj\MCD\Debug\netcoreapp3.1\Autoshop1.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Роман\source\repos\MyProject\Autoshop1\obj\MCD\Debug\netcoreapp3.1\Autoshop1.RazorAssemblyInfo.cache
+C:\Users\Роман\source\repos\MyProject\Autoshop1\obj\MCD\Debug\netcoreapp3.1\Autoshop1.RazorAssemblyInfo.cs

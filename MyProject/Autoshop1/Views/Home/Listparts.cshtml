@@ -1,0 +1,67 @@
+﻿@using Autoshop1.Models.MainModels
+@using Autoshop1.Models.Repositories
+
+
+@model IEnumerable<SearchPart>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "PartsList";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="search-list col-12">
+            <h5 style="margin-bottom: 20px;">Результат поиска по номеру:</h5>
+            @{ if (!(Model.Count() > 0))
+                {
+                    <h4>По вашему запросу ничего не найдено</h4>
+                }
+                else
+                {<table class="search-table">
+                        <thead>
+                            <tr>
+                                <th>Бренд</th>
+                                <th>Номер</th>
+                                <th>Наименование</th>
+                                <th>На складе</th>
+                                <th>Цена</th>
+                                <th>Срок поставки</th>
+                                <th></th>
+                                <!-- <th>Купить</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var p in Model)
+                                {
+                                    <tr>
+                                        <td>@p.Brand</td>
+                                        <td>@p.PartNumber</td>
+                                        <td>@p.PartName</td>
+                                        <td>@p.QuantityInStock</td>
+                                        <td>@p.SellingPrice</td>
+                                        <td>@p.DeliveryDate.Date.ToString("d")</td>
+                                        <!-- <td>
+                                            <a class="btn btn-success btn-sm pull-right" style="float: right" type="submit"
+                                                asp-controller="Cart" asp-action="AddToCart" asp-route-partId="@p.PartId">В корзину</a>
+                                        </td> -->
+                                        <td>
+                                            <div class="input-cart">
+                                                <input type="text" class="input-field" placeholder="1" value="1">
+                                                <a class="cart-button" type="submit" asp-controller="Cart" asp-action="AddToCart"
+                                                   asp-route-partId="@p.PartId">В корзину</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+    </div>
+</div>
+

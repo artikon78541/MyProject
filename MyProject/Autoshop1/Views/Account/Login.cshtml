@@ -1,0 +1,64 @@
+﻿@model LoginViewModel
+
+@{
+    ViewBag.Title = "User Login";
+}
+
+
+@*<h1>Введите Email и пароль</h1>
+
+<form method="post">
+    <div asp-validation-summary=" All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for=" Password"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label asp-for="RememberMe">
+                <input asp-for="RememberMe" />
+                @Html.DisplayNameFor(m => m.RememberMe)
+            </label>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Войти</button>
+</form>*@
+
+
+<div class="form-registration">
+    <div class="reg-header">
+        <h4>Авторизация</h4>
+    </div>
+    <div asp-validation-summary=" All" class="text-danger"></div>
+    <form method="post">
+        <div class="form-group">
+            <div>Email</div>
+            <input asp-for="Email" class="form-control" placeholder="Введите Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div>Пароль</div>
+            <input asp-for="Password" class="form-control" placeholder="Введите пароль" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label asp-for="RememberMe">
+                    <input asp-for="RememberMe" />
+                    @Html.DisplayNameFor(m => m.RememberMe)
+                </label>
+            </div>
+
+        </div>
+        <button type="submit"> Войти </button>
+    </form>
+
+</div>

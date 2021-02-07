@@ -1,0 +1,97 @@
+﻿@using Autoshop1.Models.ViewModels
+@model ModelCollection
+
+
+<script>
+    $().ready(function () {
+        $("#searchInput").autocomplete({
+
+            source: function (request, response) {
+                $.ajax({
+                    url: "/AdminPanel/GetUsers/",
+                    data: { "searchUser": request.term },
+                    type: "POST",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    }
+
+                });
+            }
+        });
+    });
+
+
+
+    $().ready(function (e) {
+
+        $("#SelectClient").click(function (e) {
+
+            e.preventDefault();
+
+
+            $.ajax({
+                url: "/AdminPanel/SelectUser/",
+                data: { searchUser: $("#searchInput").val() },
+                cache: false,
+                success: function (returnhtml) {
+                    var obj = JSON.parse(returnhtml);
+                    $("#NumId").html(obj[0].Email);
+                    $("#EmailId").html(obj[0].Email);
+                    $("#PhoneId").html(obj[0].PhoneNumber);
+                    $("#NameId").html(obj[0].UserFIO);
+                    $("#cart-total").html("(" + obj[1].CartItems + ")");
+                    $("#searchInput").val("");
+
+                },
+                dataType: "json"
+            });
+
+        });
+
+    });
+
+
+</script>
+
+
+<div class="client-block" id="RenderUser">
+
+    <div class="client-block-info">
+
+        <h5 style="margin-bottom:2%;">Информация о клиенте</h5>
+        <table class="client-table-info" id="cl">
+
+            <tr><td>Номер:</td><td class="td-client"><label id="NumId" name="NumId"> - </label></td></tr>
+            <tr><td>Email:</td><td class="td-client"><label id="EmailId"> - </label></td></tr>
+            <tr><td>Телефон:</td><td class="td-client"><label id="PhoneId"> - </label></td></tr>
+            <tr><td>ФИО: </td><td class="td-client"><label id="NameId"> - </label></td></tr>
+
+        </table>
+    </div>
+    <div class="searchLogin-form">
+        <form method="get">
+            <label for="search" style="font-size: 14px;">Выберите клиента:</label>
+            <input name="searchUser" placeholder="Номер, имя, телефон клиента..."
+                   class="admin-search-client" type="text" id="searchInput" value="">
+            <input name="UserId" type="hidden" id="UserId" value="">
+            <button class="btn" type="submit" id="SelectClient">Выбрать</button>
+        </form>
+    </div>
+
+    <div class="cart-partial">
+        <a href="#" class="cart-link">
+            <div class="iconCart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-total" id="cart-total"> (0) </span>
+            </div>
+        </a>
+    </div>
+    @*<div class="c-partial" id="c-partial">
+        @await Html.PartialAsync("Search")
+
+    </div>*@
+
+
+</div>
